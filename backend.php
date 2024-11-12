@@ -1,26 +1,21 @@
 <?php
-// Konfigurasi koneksi ke database
+
 $servername = "localhost";
-$username = "root"; // Ganti dengan username MySQL kamu
-$password = ""; // Ganti dengan password MySQL kamu
+$username = "root"; 
+$password = "";
 $dbname = "tb_cuaca.sql"; 
 
-// Membuat koneksi
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Cek koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Query untuk mengambil data maksimum suhu, minimum suhu, dan rata-rata suhu
 $sql = "SELECT MAX(suhu) AS suhu_max, MIN(suhu) AS suhu_min, AVG(suhu) AS suhu_avg FROM tb_cuaca";
 $result = $conn->query($sql);
 
-// Array untuk menyimpan data output
 $data_output = [];
 
-// Cek hasil query suhu
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $data_output['suhu_max'] = $row['suhu_max'];
